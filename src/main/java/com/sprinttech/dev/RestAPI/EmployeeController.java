@@ -1,44 +1,57 @@
 package com.sprinttech.dev.RestAPI;
 
 
+import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import javax.validation.Valid;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 
 @RestController
 @RequestMapping("/Employee")
 public class EmployeeController
 {
-    public List<Employee> employeesList = new ArrayList<Employee>();
+  //  public List<Employee> employeesList = new ArrayList<Employee>();
+    @Autowired
+    EmployeesRepository employeesRepository;
 
-    @GetMapping("/getId")
+    @GetMapping("/getAll")
      public List<Employee> getEmployees ()
     {
-       return (employeesList);
+       return (employeesRepository.findAll());
     }
 
-    @PostMapping("/addId")
-    public void addEmployee(@RequestBody Employee employee)
+    @GetMapping("/{empId}")
+    public Employee getEmployee (@PathVariable String empId)
     {
-        System.out.println(employee);
-        employeesList.add(employee);
-
+                return employeesRepository.findById(empId).get();
     }
 
-    @PutMapping("/updateId/{id}")
-    public void updateEmployee(@PathVariable("id") int id , @RequestBody Employee employee) {
-        for (Employee employee1 : employeesList) {
-            if (id == employee1.getId()) {
-                int index = employeesList.indexOf(employee1);
-                employeesList.set(index, employee);
+    @PostMapping("/addEmployees")
+    public List<Employee> addEmployee(@Valid @RequestBody List<Employee> employees)
+    {
+        employees.stream().forEach(employee -> employeesRepository.save(employee));
+              return employees;
+    }
 
-            }
+    @PutMapping("/updateId/{empId}")
+    public void updateEmployee(@PathVariable String empId , @Valid @RequestBody Employee employee) {
 
+        if (employeesRepository.findById(empId).get() != null) {
+            employeesRepository.save(employee);
         }
 
     }
 
+    @PutMapping("/updateAll")
+    public void updateEmployees(@Valid @RequestBody List<Employee> employees)
+    {
+        employees.stream().forEach(emp -> updateEmployee(emp.getEmpId(), emp));
+    }
 
 }
