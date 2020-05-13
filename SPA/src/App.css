@@ -1,24 +1,38 @@
+.App {
+  
+}
+
+.App-header {
+  background-color: blue;
+}
+
 .App-logo {
   height: 10vmin;
   pointer-events: none;
 }
 
+
+.Edit-logo {
+    height: 5vmin;
+    pointer-events: none;
+}
 #title {
-  text-align: center;
+  text-align: left;
   font-family: arial, sans-serif;
 }
 
 #EmployeeList {
-  text-align: center;
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  border: 3px solid #ddd;
-  width: 100%;
+  text-align: left;
+  border-collapse: inherit;
+  border: 5px solid #ddd;
+  width: 0%;
+  table-layout: auto;
 }
+
 
 #EmployeeList td, .EmployeeList th {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 3px;
 }
 
 #EmployeeList tr:nth-child(even){background-color: #f2f2f2;}
@@ -26,10 +40,38 @@
 #EmployeeList tr:hover {background-color: #ddd;}
 
 #EmployeeList th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: center;
-  background-color: #4CAF50;
-  color: white;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  text-align: match-parent;
+  background-color: blue;
+  color: whitesmoke;
 }
 
+table {
+   border-collapse: inherit;
+  }
+
+form {
+  position: absolute;
+  top: auto;
+  border: 4px solid gray;
+  padding: 1px;
+  margin: 0rem;
+  display: inline-grid;
+  border-collapse:inherit;
+  }
+  #AddEmployee th {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    text-align: match-parent;
+    background-color: blue;
+    color: whitesmoke;
+  }
+
+  .formtext {
+       
+    background: blue;;
+    padding: 1px;
+    width: 10px;
+    color: red;
+  }
